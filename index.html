@@ -1,9 +1,124 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Psychic Game</title>
 </head>
 <body>
+
+<h1> The Psychic Game </h1>
+
+<div id="game">
+	<p> Guess what letter I'm thinking of! Press a letter to begin!</p>
+	<p>Guess The Letter From a (lower) to z (higher)</p>
+   	<p>Guesses:</p> 
+    <p>Higher or Lower:</p>
+    <p>Letters Guessed:</p>
+    <p>Tries Left:</p> 
+    <p>Wins:</p>
+    <p>Losses:</p>
+
+</div>
+
+<script type="text/javascript">
+
+// Setting Up The Psychic Game
+
+var guesses = 0;
+var message = "Guess The Letter From a (lower) to z (higher)";
+var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var letterToGuess = "";
+var higherOrLower = "";
+var lettersGuessed = "";
+var gameOver = false;
+var triesLeft = 9;
+var wins = 0;
+var losses = 0;
+var itExists = false;
+
+startGame ();
+
+// Function for Starting the Game and Computer's Choice
+
+function startGame() {
+   var computerChoice = Math.floor(Math.random() * alphabet.length);
+   letterToGuess = alphabet[computerChoice];
+   guesses = 0;
+   lettersGuessed = [];
+   gameOver = false;
+   triesLeft = 9;
+   higherOrLower = "";
+}
+
+
+// Function for Key Press
+
+document.onkeyup = function (event) {
+    var letterPressed = String.fromCharCode(event.keyCode).toLowerCase();
+    guesses++;
+   
+
+   if (letterPressed === letterToGuess) {
+      	gameOver = true;
+        alert("You guessed correctly!"); 
+        wins++;
+        startGame();
+    } else if (triesLeft === 1) {
+        alert("You ran out of tries. Game Over!");
+        losses++;
+        startGame ();
+    } else if (itExists === true) {
+    	alert ("You already guessed that letter!")
+
+	} else {
+			lettersGuessed.push(letterPressed); 
+            computerChoice = alphabet.indexOf(letterToGuess);
+            guessIndex = alphabet.indexOf(letterPressed)     
+			if (guessIndex < 0) {
+		       higherOrLower = alert("That is not a letter");
+		    } else if (guessIndex > computerChoice) {
+		       higherOrLower = "Lower";
+		       triesLeft--;
+		    } else {
+		       higherOrLower = "Higher";
+		       triesLeft--;
+		    }
+		}
+	var instructions = "<p> Guess what letter I'm thinking of! Press a letter to begin!</p> " + message +
+       	"<p>Guesses: " + 
+        guesses + 
+        "</p>" +
+        "<p>Higher or Lower: " + 
+        higherOrLower + 
+        "</p>" +
+        "<p>Letters Guessed: " + 
+        lettersGuessed + 
+        "</p>" +
+        "<p>Tries Left: " + 
+        triesLeft +
+        "</p>" +
+         "<p>Wins: " + 
+        wins + 
+        "</p>" +
+        "<p>Losses: " + 
+        losses + 
+        "</p>";
+
+
+	document.querySelector('#game').innerHTML = instructions;
+
+	function exists () {
+	for (var i = 0; i < lettersGuessed.length; i++) {
+		if (letterPressed === lettersGuessed[i])
+			itExists = true
+	}
+	}
+	
+
+ }
+
+
+
+</script>
 
 </body>
 </html>
