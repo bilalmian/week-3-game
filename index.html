@@ -54,6 +54,7 @@ function startGame() {
 
 document.onkeyup = function (event) {
     var letterPressed = String.fromCharCode(event.keyCode).toLowerCase();
+    exists();
     guesses++;
    
 
@@ -82,7 +83,7 @@ document.onkeyup = function (event) {
 		       higherOrLower = "Higher";
 		       triesLeft--;
 		    }
-		}
+		
 	var instructions = "<p> Guess what letter I'm thinking of! Press a letter to begin!</p> " + message +
        	"<p>Guesses: " + 
         guesses + 
@@ -107,15 +108,18 @@ document.onkeyup = function (event) {
 	document.querySelector('#game').innerHTML = instructions;
 
 	function exists () {
-	for (var i = 0; i < lettersGuessed.length; i++) {
-		if (letterPressed === lettersGuessed[i])
-			itExists = true
+  for (var i = 0; i < lettersGuessed.length; i++) {
+   if (letterPressed === lettersGuessed[i]) {
+      itExists = true;
+    } else {
+      itExists = false;
+    }
 	}
 	}
 	
 
  }
-
+}
 
 
 </script>
