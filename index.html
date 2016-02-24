@@ -60,11 +60,11 @@ document.onkeyup = function (event) {
 
    if (letterPressed === letterToGuess) {
       	gameOver = true;
-        alert("You guessed correctly!"); 
+        alert("You guessed correctly! Press any key to begin again!"); 
         wins++;
         startGame();
     } else if (triesLeft === 1) {
-        alert("You ran out of tries. Game Over!");
+        alert("You ran out of tries. Game Over! Press any key to begin again!");
         losses++;
         startGame ();
     } else if (itExists === true) {
